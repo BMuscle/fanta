@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_01_143032) do
+ActiveRecord::Schema.define(version: 2019_11_01_171656) do
 
   create_table "battle_logs", force: :cascade do |t|
     t.integer "score"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 2019_11_01_143032) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["party_id"], name: "index_battle_logs_on_party_id"
+  end
+
+  create_table "character_rankings", force: :cascade do |t|
+    t.integer "ranking_id"
+    t.integer "character_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_character_rankings_on_character_id"
+    t.index ["ranking_id"], name: "index_character_rankings_on_ranking_id"
   end
 
   create_table "characters", force: :cascade do |t|
@@ -48,10 +57,6 @@ ActiveRecord::Schema.define(version: 2019_11_01_143032) do
     t.string "music_name"
     t.integer "score"
     t.integer "damage"
-    t.integer "character_id1"
-    t.integer "character_id2"
-    t.integer "character_id3"
-    t.integer "character_id4"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -67,7 +72,6 @@ ActiveRecord::Schema.define(version: 2019_11_01_143032) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "permissions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
