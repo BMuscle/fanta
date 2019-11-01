@@ -1,5 +1,6 @@
 <% @score_rank.each do |rank| %>
-<label>スコア:</label> <label> <%= rank.score %> </label>
+<label>score:</label> <label> <%= rank.score %> </label>
+
   <% rank.characters.each do |character| %>
     <label> <%= character.name %> </label>
   <% end %>

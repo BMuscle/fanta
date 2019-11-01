@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_01_171656) do
+ActiveRecord::Schema.define(version: 2019_11_01_182658) do
 
   create_table "battle_logs", force: :cascade do |t|
     t.integer "score"
@@ -53,12 +53,13 @@ ActiveRecord::Schema.define(version: 2019_11_01_171656) do
   end
 
   create_table "rankings", force: :cascade do |t|
-    t.integer "user_id"
     t.string "music_name"
     t.integer "score"
     t.integer "damage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_rankings_on_user_id"
   end
 
   create_table "user_characters", force: :cascade do |t|
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 2019_11_01_171656) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "user_hash"
   end
 
 end

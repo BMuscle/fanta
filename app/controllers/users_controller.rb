@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
 
   def show
-    user.find(params[:user_hash])
-    render user.to_json
+    user = User.find_by(user_hash: params[:user_hash])
+    render :json => user.to_json
   end
 
   def index
