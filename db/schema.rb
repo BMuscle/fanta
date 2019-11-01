@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_30_113701) do
+ActiveRecord::Schema.define(version: 2019_11_01_143032) do
 
   create_table "battle_logs", force: :cascade do |t|
     t.integer "score"
@@ -41,6 +41,28 @@ ActiveRecord::Schema.define(version: 2019_10_30_113701) do
     t.index ["character3_id"], name: "index_parties_on_character3_id"
     t.index ["character4_id"], name: "index_parties_on_character4_id"
     t.index ["user_id"], name: "index_parties_on_user_id"
+  end
+
+  create_table "rankings", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "music_name"
+    t.integer "score"
+    t.integer "damage"
+    t.integer "character_id1"
+    t.integer "character_id2"
+    t.integer "character_id3"
+    t.integer "character_id4"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_characters", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "character_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_user_characters_on_character_id"
+    t.index ["user_id"], name: "index_user_characters_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
 
+  def show
+    user.find(params[:user_hash])
+    render user.to_json
+  end
+
   def index
   end
 
