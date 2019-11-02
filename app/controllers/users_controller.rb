@@ -15,10 +15,10 @@ class UsersController < ApplicationController
 
     if party != nil
       # character1～4をpush
-      hash1[:role].push(party.character1)
-      hash1[:role].push(party.character2)
-      hash1[:role].push(party.character3)
-      hash1[:role].push(party.character4)
+      hash1[:role].push(party.character1_id)
+      hash1[:role].push(party.character2_id)
+      hash1[:role].push(party.character3_id)
+      hash1[:role].push(party.character4_id)
     end
 
     render :json => hash1.to_json
@@ -48,19 +48,25 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     @user = User.find_by(user_hash: user_params[:user_hash])
-    party = Party.find_by(user_id: @user.id)
-    if @user.update(name: user_params[:name])
+    if @user == nil || @user.update(name: user_params[:name]) == nil
       render :edit
       return
     end
-    if party
-      party.update(
-        character1_id: user_params[:party][0],
-        character2_id: user_params[:party][1],
-        character3_id: user_params[:party][2],
-        character4_id: user_params[:party][3],
-      )
+
+    party = Party.find_by(user_id: @user.id)
+    if party == nil
+      party = Party.new
+      party.user_id = @user.id
+      party.save
     end
+
+    party.update(
+      character1_id: user_params[:party][0],
+      character2_id: user_params[:party][1],
+      character3_id: user_params[:party][2],
+      character4_id: user_params[:party][3],
+    )
+
     redirect_to action: 'index', notice: 'ユーザー設定が完了しました!'
   end
 
@@ -72,9 +78,16 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
+      p = params[:user][:party] || []
       {
+        name: params[:user][:name],
         user_hash: params[:user][:user_hash],
-        party: []
+        party: [
+          p[0] || nil,
+          p[1] || nil,
+          p[2] || nil,
+          p[3] || nil,
+        ]
       }
 =begin
       params.fetch(:user, {

@@ -12,7 +12,10 @@
   <% end %>
 
   <div class="actions">
-    <%= form.text_field :user_hash, class: "form-control" %>
+    <div class="form-group cols4">
+      <%= form.label :id, "ID" %>
+      <%= form.text_field :user_hash, class: "form-control" %>
+    </div>
     <div class="form-group cols4">
       <%= form.label :name, "ニックネーム" %>
       <%= form.text_field :name, class: "form-control" %>

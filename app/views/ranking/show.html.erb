@@ -1,11 +1,23 @@
-<% @score_rank.each do |rank| %>
-<label>score:</label> <label> <%= rank.score %> </label>
-
-  <% rank.characters.each do |character| %>
-    <label> <%= character.name %> </label>
-  <% end %>
-<% end %>
-
-<% @damage_rank.each do |rank| %>
-  <label> <%= rank.damage %> </label>
-<% end %>
+<div>
+  <div class="container">
+    <h1 class="text-center">スコアランキング</h1>
+    <% @score_rank.each do |rank| %>
+      <div class="row justify-content-center text-center">
+        <label> <%= rank.user_id %> </label>
+        <label class="ml-5"> <%= rank.score %> </label>
+        <% rank.characters.each do |character| %>
+          <label> <%= character.name %> </label>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="container">
+    <h1 class="text-center">ダメージランキング</h1>
+    <% @damage_rank.each do |rank| %>
+      <div class="row justify-content-center text-center">
+        <label> <%= rank.user_id %> </label>
+        <label class="ml-5"> <%= rank.damage %> </label>
+      </div>
+    <% end %>
+  </div>
+</div>
