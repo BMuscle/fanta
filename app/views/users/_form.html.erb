@@ -23,12 +23,33 @@
 
     <label class="mt-5">パーティー</label>
     <div class="d-flex row">
+      <% if @chars.empty? %>
+        <p>使用可能なキャラクターがありません</p>
+        <p>課金してください</p>
+      <% end %>
       <% @chars.each do |char| %>
         <div class="col-3 mb-5">
           <label>
             <div>
               <%= form.check_box :party,
                 { multiple: true, checked: @my_char_ids.any? {|id| char.id == id }, include_hidden: false }, char.id
+              %>
+              &nbsp;<%= char.name %>
+            </div>
+            <img src="<%= char.image_src %>" class="img-thumbnail">
+          </label>
+        </div>
+      <% end %>
+    </div>
+
+    <label class="mt-5">購入</label>
+    <div class="d-flex row">
+      <% @all_chars.each do |char| %>
+        <div class="col-3 mb-5 m-2 card">
+          <label>
+            <div>
+              <%= form.check_box :cart,
+                { multiple: true, checked: @chars.any? {|c| char.id == c.id }, include_hidden: false }, char.id
               %>
               &nbsp;<%= char.name %>
             </div>
