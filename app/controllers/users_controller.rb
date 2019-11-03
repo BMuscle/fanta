@@ -18,10 +18,10 @@ class UsersController < ApplicationController
 
     if party != nil
       # character1～4をpush
-      hash1[:role].push(party.character1_id)
-      hash1[:role].push(party.character2_id)
-      hash1[:role].push(party.character3_id)
-      hash1[:role].push(party.character4_id)
+      hash1[:role].push(Character.find(party.character1_id))
+      hash1[:role].push(Character.find(party.character2_id))
+      hash1[:role].push(Character.find(party.character3_id))
+      hash1[:role].push(Character.find(party.character4_id))
     end
 
     render :json => hash1.to_json
